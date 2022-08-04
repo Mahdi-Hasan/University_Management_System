@@ -9,7 +9,9 @@ pipeline {
   }
   stage('Build') {
    steps {
-     app = dockerImage = docker.build "ums:1.0"
+    script{
+     dockerImage = docker.build "${ums}:${1.0}"
+    }
   }
   }
  }
