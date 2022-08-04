@@ -1,8 +1,8 @@
 pipeline {
  agent any
- environment {
-  dotnet = 'C:\\Program Files (x86)\\dotnet\\'
- }
+//  environment {
+//   dotnet = 'C:\\Program Files (x86)\\dotnet\\'
+//  }
  stages {
   stage('Checkout') {
    steps {
