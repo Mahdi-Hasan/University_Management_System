@@ -16,22 +16,22 @@ namespace UMS_Test
             _factory = factory;
         }
 
-        [Fact]
-        public void CourseUpdate()
-        {
-            var controller = new CoursesController();
-            var course = controller.Details(1);
+        // [Fact]
+        // public void CourseUpdate()
+        // {
+        //     var controller = new CoursesController();
+        //     var course = controller.Details(1);
 
-            // update course
-            var updatedCourse = new Course();
-            updatedCourse.Id = 1;
-            updatedCourse.Name = "Updated";
-            updatedCourse.Description = "Updated";
-            controller.Edit(1, updatedCourse);
+        //     // update course
+        //     var updatedCourse = new Course();
+        //     updatedCourse.Id = 1;
+        //     updatedCourse.Name = "Updated";
+        //     updatedCourse.Description = "Updated";
+        //     controller.Edit(1, updatedCourse);
 
-            var newUpdatedCourse = controller.Details(1);
-            Assert.NotEqual(course, newUpdatedCourse);
-        }
+        //     var newUpdatedCourse = controller.Details(1);
+        //     Assert.NotEqual(course, newUpdatedCourse);
+        // }
         [Theory]
         [InlineData("/")]
         [InlineData("/Courses")]

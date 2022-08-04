@@ -16,8 +16,11 @@ services:
     build: .
     # environment:
     #   TZ: "Asia/Dhaka"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+
     ports:
-      - "5001:5001"
+      - "5001:80"
     depends_on:
       - db
     
