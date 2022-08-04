@@ -17,7 +17,7 @@ pipeline {
   stage('Deploy') {
             steps {
                 script{
-                        docker.withRegistry('https://ec2-13-211-94-185.ap-southeast-2.compute.amazonaws.com', 'ap-southeast-2:aws-credentials') {
+                        docker.withRegistry('https://vivasoft.signin.aws.amazon.com/console', 'ap-southeast-2:aws-credentials') {
                     app.push("${env.BUILD_NUMBER}")
                     app.push("latest")
                     }
