@@ -49,7 +49,7 @@ namespace UMS.Controllers
         // GET: Results/Create
         public IActionResult Create()
         {
-            ViewData["CourseID"] = new SelectList(_context.Course, "Id", "Id");
+            ViewData["CourseId"] = new SelectList(_context.Course, "Id", "Id");
             ViewData["StudentId"] = new SelectList(_context.Student, "Id", "Id");
             return View();
         }
@@ -59,11 +59,10 @@ namespace UMS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,StudentId,CourseID,GPA")] Result result)
+        public async Task<IActionResult> Create([Bind("Id,StudentId,CourseId,GPA")] Result result)
         {
             try
             {
-
                 result.Id = _context.Result.Count() + 1;
                 _context.Add(result);
                 await _context.SaveChangesAsync();
@@ -71,10 +70,12 @@ namespace UMS.Controllers
             }
             catch (Exception ex)
             {
-                ViewData["CourseID"] = new SelectList(_context.Course, "Id", "Id", result.CourseID);
+                ViewData["CourseId"] = new SelectList(_context.Course, "Id", "Id", result.CourseId);
                 ViewData["StudentId"] = new SelectList(_context.Student, "Id", "Id", result.StudentId);
                 return View(result);
             }
+
+
         }
 
         // GET: Results/Edit/5
@@ -90,7 +91,7 @@ namespace UMS.Controllers
             {
                 return NotFound();
             }
-            ViewData["CourseID"] = new SelectList(_context.Course, "Id", "Id", result.CourseID);
+            ViewData["CourseId"] = new SelectList(_context.Course, "Id", "Id", result.CourseId);
             ViewData["StudentId"] = new SelectList(_context.Student, "Id", "Id", result.StudentId);
             return View(result);
         }
@@ -100,14 +101,14 @@ namespace UMS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,StudentId,CourseID,GPA")] Result result)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,StudentId,CourseId,GPA")] Result result)
         {
             if (id != result.Id)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 try
                 {
@@ -127,7 +128,7 @@ namespace UMS.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CourseID"] = new SelectList(_context.Course, "Id", "Id", result.CourseID);
+            ViewData["CourseId"] = new SelectList(_context.Course, "Id", "Id", result.CourseId);
             ViewData["StudentId"] = new SelectList(_context.Student, "Id", "Id", result.StudentId);
             return View(result);
         }

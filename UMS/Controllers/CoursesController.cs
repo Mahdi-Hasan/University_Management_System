@@ -22,9 +22,9 @@ namespace UMS.Controllers
         // GET: Courses
         public async Task<IActionResult> Index()
         {
-              return _context.Course != null ? 
-                          View(await _context.Course.ToListAsync()) :
-                          Problem("Entity set 'UMSContext.Course'  is null.");
+            return _context.Course != null ?
+                        View(await _context.Course.ToListAsync()) :
+                        Problem("Entity set 'UMSContext.Course'  is null.");
         }
 
         // GET: Courses/Details/5
@@ -56,16 +56,20 @@ namespace UMS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Gender,Year")] Course course)
+        public async Task<IActionResult> Create([Bind("Id,Name,Description")] Course course)
         {
-            if (ModelState.IsValid)
+            try
             {
+
                 course.Id = _context.Course.Count() + 1;
                 _context.Add(course);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(course);
+            catch (Exception ex)
+            {
+                return View(course);
+            }
         }
 
         // GET: Courses/Edit/5
@@ -89,34 +93,30 @@ namespace UMS.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Gender,Year")] Course course)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description")] Course course)
         {
             if (id != course.Id)
             {
                 return NotFound();
             }
-
-            if (ModelState.IsValid)
+            try
             {
-                try
-                {
-                    _context.Update(course);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CourseExists(course.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                _context.Update(course);
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(course);
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CourseExists(course.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
         }
 
         // GET: Courses/Delete/5
@@ -151,14 +151,14 @@ namespace UMS.Controllers
             {
                 _context.Course.Remove(course);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CourseExists(int id)
         {
-          return (_context.Course?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Course?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
