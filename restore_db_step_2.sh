@@ -7,8 +7,8 @@
 #I means the we have to restore the "PT_Data" "PT_Log" 
 
 
-data=ums_Data
-log=ums_Log
+data=ums
+log=ums_log
 
 container_name=mssql
 server_name=mssql
@@ -16,7 +16,7 @@ user=SA
 sa_password=saPass1234
 db_name=ums
  
-bak_file_name=ums.bak
+bak_file_name=ums1.bak
 
 cmd_conf=1
 
