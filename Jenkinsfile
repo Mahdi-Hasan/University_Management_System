@@ -6,7 +6,7 @@ pipeline {
  stages {
   stage('Checkout') {
    steps {
-    git credentialsId: 'Sadman-Saadat', url: 'https://github.com/Mahdi-Hasan/University_Management_System.git', branch: 'devops-test'
+    git url: 'https://github.com/Mahdi-Hasan/University_Management_System.git', branch: 'devops-test'
    }
   }
   stage('Restore PACKAGES') {
