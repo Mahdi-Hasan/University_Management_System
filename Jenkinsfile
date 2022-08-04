@@ -17,9 +17,8 @@ pipeline {
   stage('Deploy') {
    steps{
     script{
-     def deploy = docker.withRegistry('https://registry.hub.docker.com', 'git') {
-      image.push("latest")        
-              }
+     def deploy = docker.withRegistry('https://registry.hub.docker.com', 'git')
+      deploy.push("latest")
     }
    }
    }
