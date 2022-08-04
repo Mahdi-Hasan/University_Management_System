@@ -5,33 +5,37 @@ using UMS.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using UMS.Models;
 using Microsoft.VisualStudio.TestPlatform.TestHost;
+using UMS.Data;
 
 namespace UMS_Test
 {
     public class EndpointTest : IClassFixture<WebApplicationFactory<Program>>
     {
         private readonly WebApplicationFactory<Program> _factory;
-        public EndpointTest(WebApplicationFactory<Program> factory)
+        private readonly UMSContext _context;
+        public EndpointTest(WebApplicationFactory<Program> factory, UMSContext context)
         {
             _factory = factory;
+            _context = context;
         }
 
-        //[Fact]
-        //public void CourseUpdate()
-        //{
-        //    var controller = new CoursesController();
-        //    var course = controller.Details(1);
+        [Fact]
+        public void CourseUpdate()
+        {
 
-        //    // update course
-        //    var updatedCourse = new Course();
-        //    updatedCourse.Id = 1;
-        //    updatedCourse.Name = "Updated";
-        //    updatedCourse.Description = "Updated";
-        //    controller.Edit(1, updatedCourse);
+            var controller = new CoursesController(_context);
+            var course = controller.Details(1);
 
-        //    var newUpdatedCourse = controller.Details(1);
-        //    Assert.NotEqual(course, newUpdatedCourse);
-        //}
+            // update course
+            var updatedCourse = new Course();
+            updatedCourse.Id = 1;
+            updatedCourse.Name = "Updated";
+            updatedCourse.Description = "Updated";
+            controller.Edit(1, updatedCourse);
+
+            var newUpdatedCourse = controller.Details(1);
+            Assert.NotEqual(course, newUpdatedCourse);
+        }
         [Theory]
         [InlineData("/")]
         [InlineData("/Courses")]
