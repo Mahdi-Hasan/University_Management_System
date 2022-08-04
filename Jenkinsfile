@@ -18,7 +18,7 @@ pipeline {
    steps{
     script{
      def deploy = docker.withRegistry('https://registry.hub.docker.com', 'git') {
-      app.push("latest")        
+      image.push("latest")        
               }
     }
    }
