@@ -11,22 +11,22 @@ pipeline {
   }
   stage('Restore PACKAGES') {
    steps {
-    sh "dotnet restore --configfile NuGet.Config"
+    sh "restore --configfile NuGet.Config"
    }
   }
   stage('Clean') {
    steps {
-    sh 'dotnet clean'
+    sh 'clean'
    }
   }
   stage('Build') {
    steps {
-    sh 'dotnet build --configuration Release'
+    sh 'build --configuration Release'
    }
   }
   stage('Pack') {
    steps {
-    sh 'dotnet pack --no-build --output nupkgs'
+    sh 'pack --no-build --output nupkgs'
    }
   }
  }
