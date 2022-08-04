@@ -8,10 +8,10 @@ using Microsoft.VisualStudio.TestPlatform.TestHost;
 
 namespace UMS_Test
 {
-    public class CourseControllerTest : IClassFixture<WebApplicationFactory<Program>>
+    public class EndpointTest : IClassFixture<WebApplicationFactory<Program>>
     {
         private readonly WebApplicationFactory<Program> _factory;
-        public CourseControllerTest(WebApplicationFactory<Program> factory)
+        public EndpointTest(WebApplicationFactory<Program> factory)
         {
             _factory = factory;
         }

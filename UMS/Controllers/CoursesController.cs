@@ -19,10 +19,6 @@ namespace UMS.Controllers
             _context = context;
         }
 
-        public CoursesController()
-        {
-        }
-
         // GET: Courses
         public async Task<IActionResult> Index()
         {
