@@ -20,5 +20,6 @@ pipeline {
      sh 'docker push sadman39/ums:1.0'
         }
    }
+   }
  }
 }
