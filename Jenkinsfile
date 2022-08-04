@@ -10,19 +10,15 @@ pipeline {
   stage('Build') {
    steps {
     script{
-     def image = docker.build "ums:1.0"
+     def image = docker.build "sadman39/ums:1.0"
     }
   }
   }
   stage('Deploy') {
-            steps {
-                script{
-                        docker.withRegistry('https://286062821256.dkr.ecr.ap-south-1.amazonaws.com/ums', 'ecr:ap-south-1:awscreds') {
-                    app.push("${env.BUILD_NUMBER}")
-                    app.push("latest")
-                    }
-                }
-            }
+   steps{
+    script{
+     sh 'docker push sadman39/ums:1.0'
         }
+   }
  }
 }
