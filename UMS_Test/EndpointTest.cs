@@ -8,30 +8,30 @@ using Microsoft.VisualStudio.TestPlatform.TestHost;
 
 namespace UMS_Test
 {
-    public class CourseControllerTest : IClassFixture<WebApplicationFactory<Program>>
+    public class EndpointTest : IClassFixture<WebApplicationFactory<Program>>
     {
         private readonly WebApplicationFactory<Program> _factory;
-        public CourseControllerTest(WebApplicationFactory<Program> factory)
+        public EndpointTest(WebApplicationFactory<Program> factory)
         {
             _factory = factory;
         }
 
-        [Fact]
-        public void CourseUpdate()
-        {
-            var controller = new CoursesController();
-            var course = controller.Details(1);
+        //[Fact]
+        //public void CourseUpdate()
+        //{
+        //    var controller = new CoursesController();
+        //    var course = controller.Details(1);
 
-            // update course
-            var updatedCourse = new Course();
-            updatedCourse.Id = 1;
-            updatedCourse.Name = "Updated";
-            updatedCourse.Description = "Updated";
-            controller.Edit(1, updatedCourse);
+        //    // update course
+        //    var updatedCourse = new Course();
+        //    updatedCourse.Id = 1;
+        //    updatedCourse.Name = "Updated";
+        //    updatedCourse.Description = "Updated";
+        //    controller.Edit(1, updatedCourse);
 
-            var newUpdatedCourse = controller.Details(1);
-            Assert.NotEqual(course, newUpdatedCourse);
-        }
+        //    var newUpdatedCourse = controller.Details(1);
+        //    Assert.NotEqual(course, newUpdatedCourse);
+        //}
         [Theory]
         [InlineData("/")]
         [InlineData("/Courses")]
