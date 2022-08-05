@@ -24,7 +24,6 @@ namespace UMS_Test
         [InlineData("/Students")]
         [InlineData("/CourseRegistrations")]
         [InlineData("/Results")]
-        [InlineData("/GetResults")]
         public async Task Get_EndpointsReturnSuccessAndCorrectContentType(string url)
         {
             // Arrange

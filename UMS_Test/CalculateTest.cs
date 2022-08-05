@@ -35,7 +35,7 @@ namespace UMS_Test
                 Id = 1,
                 CourseId = 1,
                 StudentId = 1,
-                GPA = 2.0M
+                GPA = 4.0M
             };
             gpaList.Add(result1);
             gpaList.Add(new Result()
