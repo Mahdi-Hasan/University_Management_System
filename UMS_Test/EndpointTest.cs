@@ -5,6 +5,8 @@ using UMS.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using UMS.Models;
 using Microsoft.VisualStudio.TestPlatform.TestHost;
+using UMS.Data;
+using UMS.Models.Utilities;
 
 namespace UMS_Test
 {
@@ -16,22 +18,6 @@ namespace UMS_Test
             _factory = factory;
         }
 
-        // [Fact]
-        // public void CourseUpdate()
-        // {
-        //     var controller = new CoursesController();
-        //     var course = controller.Details(1);
-
-        //     // update course
-        //     var updatedCourse = new Course();
-        //     updatedCourse.Id = 1;
-        //     updatedCourse.Name = "Updated";
-        //     updatedCourse.Description = "Updated";
-        //     controller.Edit(1, updatedCourse);
-
-        //     var newUpdatedCourse = controller.Details(1);
-        //     Assert.NotEqual(course, newUpdatedCourse);
-        // }
         [Theory]
         [InlineData("/")]
         [InlineData("/Courses")]
@@ -48,8 +34,10 @@ namespace UMS_Test
                 var response = await client.GetAsync(url);
 
                 // Assert
-                response.EnsureSuccessStatusCode(); // Status Code 200-299
-                Assert.Equal("200", response.StatusCode.ToString());
+                // Status Code 200-299
+                var code = (int)response.StatusCode;
+                Assert.Equal(code, 200);
+               
             }
             catch (Exception ex)
             {

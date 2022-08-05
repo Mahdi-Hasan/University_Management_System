@@ -112,6 +112,7 @@ namespace UMS.Controllers
             {
                 try
                 {
+                    courseRegistration.IsApproved = 0;
                     _context.Update(courseRegistration);
                     await _context.SaveChangesAsync();
                 }
@@ -151,6 +152,30 @@ namespace UMS.Controllers
             }
 
             return View(courseRegistration);
+        }
+        public async Task<IActionResult> Approve(Guid? id)
+        {
+            var courseRegistration = await _context.CourseRegistration
+                                    .FirstOrDefaultAsync(m => m.Id == id);
+            try
+            {
+                courseRegistration.IsApproved = 1;
+                _context.Update(courseRegistration);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!CourseRegistrationExists(courseRegistration.Id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            return View(courseRegistration);
+            }
         }
 
         // POST: CourseRegistrations/Delete/5
