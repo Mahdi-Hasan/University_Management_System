@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using UMS.Data;
 using UMS.Models;
+using UMS.Models.Utilities;
 
 namespace UMS.Controllers
 {
@@ -20,10 +21,15 @@ namespace UMS.Controllers
         }
 
         // GET: Results
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? StudentId)
         {
-            var uMSContext = _context.Result.Include(r => r.Course).Include(r => r.Student);
-            return View(await uMSContext.ToListAsync());
+            decimal cg = 4;
+            var uMSContext = _context.Result.Include(r => r.Course).Include(r => r.Student).Where(s=>s.StudentId == StudentId).ToList();
+            if(uMSContext.Count() > 0) {
+                cg = Calculate.CalculateCGPA(uMSContext);
+            }
+            ViewData["Cgpa"] = cg;
+            return View(uMSContext);
         }
 
         // GET: Results/Details/5
@@ -176,5 +182,6 @@ namespace UMS.Controllers
         {
             return (_context.Result?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
     }
 }

@@ -3,45 +3,66 @@
 @{
     ViewData["Title"] = "Index";
 }
+<div class="row">
+    <div class=" col-md-6">
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+    </div>
+    <div class="col-md-6">
+        <form action="Results">
+            <label for="StudentId">Student Id:</label>
+            <input type="number" id="StudentId" name="StudentId">
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</div>
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
+@if (Model.Count() > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.StudentId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CourseId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.GPA)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Student.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Course.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GPA)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Student)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Course)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.GPA)
-            </th>
-            <th></th>
+            <th colspan="2">Total course Enrolled : @Model.Count()</th>
+            <th colspan="2">Cumalative Grade Point Average: @ViewBag.Cgpa</th>
         </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Student.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Course.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GPA)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+    </table>
 }
-    </tbody>
-</table>
+else
+{
+    <p class="text-center mt-lg-5">No Result Available. Please Search with Studentd Id.</p>
+}
