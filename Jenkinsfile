@@ -17,8 +17,9 @@ pipeline {
   stage('Deploy') {
    steps{
     script{
-     sh 'docker push sadman39/ums:1.0'
-        }
+     def deploy = docker.withRegistry('https://registry.hub.docker.com', 'git')
+      deploy.push("latest")
+    }
    }
    }
  }
