@@ -1,19 +1,21 @@
 version: '3.3'
 services:
-  db:
-    image: mcr.microsoft.com/mssql/server:2019-latest
-    container_name: mssql
-    hostname: mssql
-    environment:
-      SA_PASSWORD: "saPass1234"
-      ACCEPT_EULA: "Y"     
-    restart: unless-stopped 
-    ports:
-      - "1433:1433"
-    volumes:
-      - sql_data_volume:/var/opt/mssql
+  # db:
+  #   image: mcr.microsoft.com/mssql/server:2019-latest
+  #   container_name: mssql
+  #   hostname: mssql
+  #   environment:
+  #     SA_PASSWORD: "saPass1234"
+  #     ACCEPT_EULA: "Y"     
+  #   restart: unless-stopped 
+  #   ports:
+  #     - "1433:1433"
+  #   volumes:
+  #     - sql_data_volume:/var/opt/mssql
+  #   networks:
+  #     - monitoring
   api:
-    build: .
+    image: 286062821256.dkr.ecr.ap-south-1.amazonaws.com/ums:3.0
     # environment:
     #   TZ: "Asia/Dhaka"
     environment:
@@ -21,8 +23,6 @@ services:
 
     ports:
       - "5001:80"
-    depends_on:
-      - db
     
 volumes: 
     sql_data_volume:

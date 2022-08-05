@@ -16,14 +16,15 @@ user=SA
 sa_password=saPass1234
 db_name=ums
  
-bak_file_name=ums1.bak
+bak_file_name=ums.bak
 
 cmd_conf=1
+
 
 docker exec -it $container_name /opt/mssql-tools/bin/sqlcmd -S $server_name -U $user -P $sa_password -Q 'RESTORE DATABASE '$db_name' FROM DISK = "/var/opt/mssql/backups/'$bak_file_name'" WITH MOVE '\"$data\"' TO "/var/opt/mssql/data/'$db_name'_userdata.ndf", MOVE '\"$log\"' TO "/var/opt/mssql/data/'$db_name'_log.ldf"'
 
 echo '..........List Of Databses.......'
-docker exec -it $container_name /opt/mssql-tools/bin/sqlcmd -S $server_name -U $user -P $sa_password -Q 'SELECT Name FROM sys.Databases'
+#docker exec -it $container_name /opt/mssql-tools/bin/sqlcmd -S $server_name -U $user -P $sa_password -Q 'SELECT Name FROM sys.Databases'
 
 # For Sql CMD
 
