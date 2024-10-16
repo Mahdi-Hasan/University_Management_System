@@ -4,7 +4,7 @@
 #PT_Data 		C:\Program Files\Microsoft SQL Server\MSSQL15.LOCALHOST\MSSQL\DATA\PT.mdf
 #PT_Log 		C:\Program Files\Microsoft SQL Server\MSSQL15.LOCALHOST\MSSQL\DATA\PT.ldf
 
-#I means the we have to restore the "PT_Data" "PT_Log" 
+#It means that we have to restore the "PT_Data" "PT_Log" 
 
 
 data=ums
